@@ -4,6 +4,19 @@ lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
       scalaVersion := "2.12.4",
+      name := "ERP",
+      libraryDependencies ++= Seq(
+        akkaHttp,
+        akkaActor,
+        akkaStream,
+        akkaHttpCirce,
+        circeGeneric,
+        pureConfig,
+        slick,
+        mysql,
+        scalaTest % Test,
+        slf4j
+      ),
       scalacOptions ++= Seq(
         "-deprecation",
         "-encoding", "utf-8",
@@ -55,12 +68,5 @@ lazy val root = (project in file(".")).
         "-Ywarn-unused:imports",
         "-Xfatal-warnings"
       )))
-    )),
-    name := "ERP",
-    libraryDependencies ++= Seq(
-      slick,
-      mysql,
-      scalaTest % Test,
-      slf4j
-    )
+    ))
   )

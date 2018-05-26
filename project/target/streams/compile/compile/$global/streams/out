@@ -1,0 +1,4 @@
+[error] /home/mauricio/projects/mine/erp/project/Dependencies.scala:12:3: illegal start of simple expression
+[error]   lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.0.5"
+[error]   ^
+[error] one error found
