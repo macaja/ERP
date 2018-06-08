@@ -5,8 +5,10 @@ lazy val root = (project in file(".")).
     inThisBuild(List(
       scalaVersion := "2.12.4",
       name := "ERP",
-      coverageMinimum := 70,
+      coverageEnabled := true,
+      coverageMinimum := 1,
       coverageFailOnMinimum := true,
+      coverageHighlighting := true,
       libraryDependencies ++= Seq(
         akkaHttp,
         akkaActor,
