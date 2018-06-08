@@ -1,4 +1,4 @@
-package erp.infrastructure.mysql.daos
+/*package erp.infrastructure.mysql.daos
 
 import erp.infrastructure.mysql.AccountRecord
 import slick.jdbc.MySQLProfile.api._
@@ -15,3 +15,4 @@ object AccountDAO extends TableQuery(new Accounts(_)){
   def store(account: AccountRecord) = AccountDAO += account
   def getAccountById(id: Int) = AccountDAO.filter(_.id === id).result
 }
+*/
