@@ -5,8 +5,11 @@ lazy val root = (project in file(".")).
     inThisBuild(List(
       scalaVersion := "2.12.4",
       name := "ERP",
+      fork := true,
+      fork in Test := true,
+      fork in IntegrationTest := true,
       coverageEnabled := true,
-      coverageMinimum := 1,
+      coverageMinimum := 70,
       coverageFailOnMinimum := true,
       coverageHighlighting := true,
       libraryDependencies ++= Seq(
