@@ -9,6 +9,7 @@ object Dependencies {
   lazy val akkaStream = "com.typesafe.akka" %% "akka-stream" % "2.5.12"
   lazy val akkaHttpCirce = "de.heikoseeberger" %% "akka-http-circe" % "1.20.1"
   lazy val circeGeneric = "io.circe" %% "circe-generic" % "0.9.3"
+  lazy val catsCore = "org.typelevel" %% "cats-core" % "1.1.0"
   lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.0.5"
   lazy val slf4j =   "org.slf4j" % "slf4j-nop" % "1.6.4"
 }

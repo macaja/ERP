@@ -15,6 +15,7 @@ lazy val root = (project in file(".")).
         akkaStream,
         akkaHttpCirce,
         circeGeneric,
+        catsCore,
         pureConfig,
         slick,
         mysql,

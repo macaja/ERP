@@ -3,8 +3,11 @@ package erp
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.{ActorMaterializer, Materializer}
+import erp.accounting.ERPResources
+import erp.accounting.repositories.ERPRepository
 import erp.infrastructure.configuration.ERPConfiguration
 import erp.infrastructure.http.Routes
+import erp.infrastructure.mysql.database.ERPDatabase
 import slick.jdbc.MySQLProfile
 import slick.jdbc.MySQLProfile.api._
 
@@ -20,6 +23,12 @@ object Main extends Routes with App {
   val config = ERPConfiguration
 
   val db: MySQLProfile.backend.Database = Database.forConfig("mysql")
+
+  implicit val provider: ERPDatabase = new ERPDatabase(db)
+
+  implicit val erpResources: ERPResources = new ERPResources {
+    override def repository: ERPRepository = new ERPRepository
+  }
 
   Http().bindAndHandle(routes,config.httpConfig.host,config.httpConfig.port) onComplete{
     case Failure(ex) => println(s"Failed to bind http service due to $ex")
