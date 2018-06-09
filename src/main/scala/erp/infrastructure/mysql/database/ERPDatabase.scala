@@ -4,7 +4,7 @@ import erp.infrastructure.mysql.daos.{AccountsDAO, CreditDepositsDAO, DebitDepos
 import slick.jdbc.MySQLProfile
 
 import scala.concurrent.ExecutionContext
-
+// $COVERAGE-OFF$
 class ERPDatabase(database: MySQLProfile.backend.Database)(implicit ec: ExecutionContext) {
 
   object accounts extends AccountsDAO(database)
@@ -12,3 +12,4 @@ class ERPDatabase(database: MySQLProfile.backend.Database)(implicit ec: Executio
   object debitDeposits extends DebitDepositsDAO(database)
 
 }
+// $COVERAGE-ON$
