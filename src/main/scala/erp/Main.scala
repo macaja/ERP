@@ -8,6 +8,7 @@ import erp.accounting.repositories.ERPRepository
 import erp.infrastructure.configuration.ERPConfiguration
 import erp.infrastructure.http.Routes
 import erp.infrastructure.mysql.database.ERPDatabase
+import erp.infrastructure.mysql.tables
 import slick.jdbc.MySQLProfile
 import slick.jdbc.MySQLProfile.api._
 
@@ -23,6 +24,8 @@ object Main extends Routes with App {
   val config = ERPConfiguration
 
   val db: MySQLProfile.backend.Database = Database.forConfig("mysql")
+
+  db.run(tables.setup)
 
   implicit val provider: ERPDatabase = new ERPDatabase(db)
 

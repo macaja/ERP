@@ -1,22 +1,20 @@
 package erp.accounting.domain
 
-import java.util.UUID
-
 import erp.accounting.domain.errors.{AccountNameIsEmpty, DomainError, TypeAccountNotSupported}
 import erp.infrastructure.http.AccountDTO
 
-sealed trait TypeAccount
+sealed trait AccountType
 
-case object Active extends TypeAccount
-case object Passive extends TypeAccount
-case object Capital extends TypeAccount
-case object Income extends TypeAccount
-case object Expenses extends TypeAccount
-case object CostsOfSale extends TypeAccount
-case object ProductionCosts extends TypeAccount
+case object Active extends AccountType
+case object Passive extends AccountType
+case object Capital extends AccountType
+case object Income extends AccountType
+case object Expenses extends AccountType
+case object CostsOfSale extends AccountType
+case object ProductionCosts extends AccountType
 
-object Type {
-  def apply(typeAccount: String): Either[DomainError,TypeAccount] = typeAccount.toLowerCase match {
+object AccountType {
+  def apply(accountType: String): Either[DomainError,AccountType] = accountType.toLowerCase match {
     case "active" => Right(Active)
     case "passive" => Right(Passive)
     case "capital" => Right(Capital)
@@ -24,18 +22,18 @@ object Type {
     case "expenses" => Right(Expenses)
     case "costsofsale" => Right(CostsOfSale)
     case "productioncosts" => Right(ProductionCosts)
-    case _ => Left(TypeAccountNotSupported(typeAccount))
+    case _ => Left(TypeAccountNotSupported(accountType))
   }
 }
 
-case class Account(code: UUID,name: String,typeAccount: TypeAccount,duty: List[Double],having: List[Double], balance: Double)
+case class Account(id: Option[Int],name: String,accountType: AccountType,duty: List[Deposit],having: List[Deposit], balance: Double)
 
 object Account{
   def apply(accountDTO: AccountDTO): Either[DomainError, Account] = {
     for{
       n <- validateName(accountDTO.name)
-      ta <- Type(accountDTO.typeAccount)
-    } yield new Account(UUID.randomUUID(),n,ta, Nil, Nil, 0D)
+      ta <- AccountType(accountDTO.typeAccount)
+    } yield new Account(None,n,ta, Nil, Nil, 0D)
   }
 
   private[this] def validateName(name:String): Either[DomainError, String] =

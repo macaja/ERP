@@ -10,6 +10,6 @@ trait Routes extends Commands {
   implicit val ec: ExecutionContext
   implicit val erpResources: ERPResources
 
-  def routes = createAccountingAccount
+  def routes = accountingERPRoutes
 
 }
